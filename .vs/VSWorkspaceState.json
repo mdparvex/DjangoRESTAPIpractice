@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\backend",
+    "\\backend\\api",
+    "\\backend\\products",
+    "\\backend\\testdjango",
     "\\py_client"
   ],
-  "SelectedNode": "\\py_client",
+  "SelectedNode": "\\backend\\api\\views.py",
   "PreviewInSolutionExplorer": false
 }
