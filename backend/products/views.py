@@ -1,3 +1,4 @@
+from cgitb import lookup
 from rest_framework import generics
 from .models import Products
 from .serializers import ProductSerializer
@@ -29,6 +30,29 @@ class ProductDetailAPIView(generics.RetrieveAPIView):
 class ProductListAPIView(generics.ListAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductSerializer
+
+class ProductUpdateAPIView(generics.UpdateAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+
+    def perform_create(self, serializer):
+        
+        instance = serializer.save()
+        if not instance.content:
+            content = instance.title
+
+        serializer.save(content=content)
+
+
+class ProductDestroyAPIView(generics.DestroyAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductSerializer
+    lookup_field = 'pk'
+
+    def perform_destroy(self, instance):
+        super().perform_destroy(instance)
+        
 
 #method base view
 @api_view(["POST", "GET"])
